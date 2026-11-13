@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
-import LoginPage   from '../pages/LoginPage'
+import LoginPage from '../pages/LoginPage.js';
 
-test.describe('Login Scenarios',async()=>{
-    test('Valid login',async({page})=>{
-        await page.goto("https://www.saucedemo.com/");
-        const loginPage = new LoginPage(page);
-        await loginPage.enterUsername();
-        await loginPage.enterPassword();
-        await loginPage.clicklogin();
+test('Valid login', async ({ page }) => {
 
-    })
-})
+    await page.goto('/');
+
+    const loginPage = new LoginPage(page);
+
+    await loginPage.login('standard_user', 'secret_sauce');
+
+    await expect(page).toHaveURL(/inventory.html/);
+
+});

@@ -1,18 +1,32 @@
-export default class LoginPage {
+class LoginPage {
+
     constructor(page) {
+
         this.page = page;
-        this.usenameInput = page.getByPlaceholder('Username');
-        this.passwordInput = page.getByPlaceholder('Password');
-        this.pagesubmit = page.locator('[id="login-button"]');
+
+        this.username = page.locator('#user-name');
+        this.password = page.locator('#password');
+        this.loginButton = page.locator('#login-button');
+
     }
 
-    async enterUsername() {
-        await this.usenameInput.fill('standard_user');
+    async enterUsername(username) {
+        await this.username.fill(username);
     }
-    async enterPassword() {
-        await this.passwordInput.fill('secret_sauce');
+
+    async enterPassword(password) {
+        await this.password.fill(password);
     }
-    async clicklogin() {
-        await this.pagesubmit.click();
-    }    
+
+    async clickLogin() {
+        await this.loginButton.click();
+    }
+
+    async login(username, password) {
+        await this.enterUsername(username);
+        await this.enterPassword(password);
+        await this.clickLogin();
+    }
 }
+
+export default LoginPage;
